@@ -1,8 +1,0 @@
-# Values for the detection radius. Default is 100
-radiusX: 100
-radiusY: 100
-radiusZ: 100 
-
-# Control options. Default is true. Replace with false to disable
-cats enabled: true 
-dogs enabled: true
