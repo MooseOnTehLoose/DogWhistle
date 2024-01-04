@@ -1,7 +1,9 @@
 name: DogWhistle
-main: moosecraft.DogWhistle
-version: 1.5.0
+author: MooseOnTehLoose
+main: net.moosecraft.DogWhistle.DogWhistle
+version: 2.1-1.20.2
+api-version: 1.20.2
 commands:
    dogwhistle:
-      description: left click the air with a bone/raw fish to command dogs/cats.
-      usage: "left click the air with a bone/raw fish to command dogs/cats"
+      description: left click the air with a bone/fish to command dogs/cats.
+      usage: "left click the air with a bone/fish to command dogs/cats"
