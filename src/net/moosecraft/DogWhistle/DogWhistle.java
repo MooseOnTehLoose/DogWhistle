@@ -5,6 +5,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Ocelot;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Sittable;
+import org.bukkit.entity.Tameable;
 import org.bukkit.entity.Wolf;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
@@ -13,7 +15,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class DogWhistle extends JavaPlugin implements Listener{
+public class DogWhistle extends JavaPlugin implements Listener{
 	
 	
 	//Read variables from config file
@@ -22,7 +24,6 @@ public final class DogWhistle extends JavaPlugin implements Listener{
 	Integer radiusZ;
 	Boolean dogEnabled;
 	Boolean catEnabled;
-	
 	
 	
 	@Override
@@ -77,7 +78,6 @@ public final class DogWhistle extends JavaPlugin implements Listener{
     		Action properAction = Action.LEFT_CLICK_AIR;
     		ItemStack inHand = event.getItem();
     		Material bone = Material.BONE;
-    		Material fish = Material.RAW_FISH;
 	
     		// make sure to check against correct usage
     		if ( owner.isOnline() ){
@@ -85,7 +85,8 @@ public final class DogWhistle extends JavaPlugin implements Listener{
     			if ( click != null && click == properAction && inHand.getType() != null ){	
     				for ( Entity entity : owner.getNearbyEntities(radiusX, radiusY, radiusZ) ){			
     					//check in the radius specified for all wolf entities
-    					if ( inHand.getType() == bone ){						
+    					Material heldItem = inHand.getType();
+    					if ( heldItem == bone ){						
     						if (  entity.getType() == EntityType.WOLF && dogEnabled ){				
     							//cast entity to wolf
     							Wolf dog = (Wolf)entity;  								
@@ -107,22 +108,25 @@ public final class DogWhistle extends JavaPlugin implements Listener{
     						}//if wolf
     					}//if bone in hand			
     					//check in the radius specified for all cat entities
-    					else if ( inHand.getType() == fish && catEnabled ){					
+    					else if ( ( heldItem == Material.COD ||
+    							    heldItem == Material.PUFFERFISH ||
+    								heldItem == Material.TROPICAL_FISH ||
+    								heldItem == Material.SALMON ) && catEnabled ){					
     						if (  entity.getType() == EntityType.OCELOT ){					
     							//cast entity to Ocelot
     							Ocelot cat = (Ocelot)entity;	
-    							if ( cat.getOwner() != null ){ 	
+    							if ( ((Tameable) cat).getOwner() != null ){ 	
     								//get the name of the cat's owner
-    								String aName =  cat.getOwner().getName();		
+    								String aName =  ((Tameable) cat).getOwner().getName();		
     								//get the name of the player who caused the InteractEvent
     								String oName = owner.getName();		
     								//If names are equal, toggle state of cat, else do not toggle state
     								if ( aName == oName ){
-    									if ( cat.isSitting() == true ){
-    										cat.setSitting(false);
+    									if ( ((Sittable) cat).isSitting() == true ){
+    										((Sittable) cat).setSitting(false);
     									}//if 	
     									else{
-    										cat.setSitting(true);
+    										((Sittable) cat).setSitting(true);
     									}//else
     								}//if correct player name		
     							}//if not null	
