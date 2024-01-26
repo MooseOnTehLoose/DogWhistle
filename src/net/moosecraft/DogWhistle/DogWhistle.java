@@ -1,6 +1,7 @@
 package net.moosecraft.DogWhistle;
 
 import org.bukkit.Material;
+import org.bukkit.entity.Cat;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Ocelot;
@@ -114,7 +115,7 @@ public class DogWhistle extends JavaPlugin implements Listener{
     								heldItem == Material.SALMON ) && catEnabled ){					
     						if (  entity.getType() == EntityType.CAT ){					
     							//cast entity to Ocelot
-    							Ocelot cat = (Ocelot)entity;	
+    							Cat cat = (Cat)entity;	
     							if ( ((Tameable) cat).getOwner() != null ){ 	
     								//get the name of the cat's owner
     								String aName =  ((Tameable) cat).getOwner().getName();		
