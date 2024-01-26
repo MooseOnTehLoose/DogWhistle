@@ -112,7 +112,7 @@ public class DogWhistle extends JavaPlugin implements Listener{
     							    heldItem == Material.PUFFERFISH ||
     								heldItem == Material.TROPICAL_FISH ||
     								heldItem == Material.SALMON ) && catEnabled ){					
-    						if (  entity.getType() == EntityType.OCELOT ){					
+    						if (  entity.getType() == EntityType.CAT ){					
     							//cast entity to Ocelot
     							Ocelot cat = (Ocelot)entity;	
     							if ( ((Tameable) cat).getOwner() != null ){ 	
